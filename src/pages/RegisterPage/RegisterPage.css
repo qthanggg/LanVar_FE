@@ -1,0 +1,74 @@
+.register-page {
+  height: 500px;
+  border: 1px solid red;
+}
+
+.register-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+  /* Adjust background color */
+}
+
+/* Container for content sections */
+.register-page__container {
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px;
+}
+
+/* Left and right content sections */
+.register-page__left,
+.register-page__right {
+  padding: 30px;
+}
+
+.register-page .register-page__right h3 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Paragraph text */
+.register-page .register-page__left div {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.register-page .register-page__right form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* Adjust spacing between form elements */
+}
+
+.register-page .register-page__right form label {
+  font-weight: bold;
+}
+
+.register-page .register-page__right form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width: 100%;
+}
+
+.register-page .register-page__right form button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #007bff;
+  /* Adjust button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
