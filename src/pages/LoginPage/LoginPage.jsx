@@ -25,6 +25,7 @@ export const LoginPage = () => {
     password: "",
     isRemember: "",
   });
+
   const handleDataChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
   };
@@ -33,40 +34,21 @@ export const LoginPage = () => {
     const { data, err } = await axiosClient.post("/User/Login", formData);
     if (err) {
       toast.error("Login fail!");
-
       return;
     }
     const { token, user } = data;
     localStorage.setItem("token", token);
     dispatch(setLoggedInAccount(user));
-    navigate("/home");
-    toast.success("Login Succes !");
-    console.log("token", token);
-    console.log("user", user);
+
+    // Kiểm tra vai trò của người dùng và chuyển hướng nếu cần thiết
+    if (user.permission_id === 1) {
+      navigate("/admin");
+    } else {
+      navigate("/home");
+    }
+
+    toast.success("Login Success !");
   };
-
-  //const handleLogin = async () => {
-  //   try {
-  //     const response = await axiosClient.post("/User/Login", formData);
-  //     const { token, user } = response.data;
-
-  //     // Lưu accessToken vào localStorage
-  //     localStorage.setItem("accessToken", token);
-
-  //     // Lưu thông tin người dùng vào Redux store hoặc localStorage nếu cần
-  //     dispatch(setLoggedInAccount(user));
-
-  //     // Điều hướng đến trang home
-  //     navigate("/home");
-
-  //     // Hiển thị thông báo thành công
-  //     toast.success("Login Success !");
-  //   } catch (error) {
-  //     // Xử lý lỗi
-  //     console.error("Login failed:", error);
-  //     toast.error("Login failed!");
-  //   }
-  // };
 
   return (
     <>
