@@ -46,14 +46,14 @@ export const Header = () => {
                   Home
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink to="/shop-category" className="nav-link">
+              {/* <NavItem>
+                <NavLink to="#" className="nav-link">
                   Shop
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
-                <NavLink to="/blog" className="nav-link">
-                  Blog
+                <NavLink to="/auction" className="nav-link">
+                  Auction
                 </NavLink>
               </NavItem>
               <NavItem>

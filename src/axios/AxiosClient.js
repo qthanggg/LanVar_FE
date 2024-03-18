@@ -20,7 +20,7 @@ const onRequest = (config) => {
   const { url, method } = config;
   const permitAuthen = noAuth.some((o) => o.url === url && o.method === method);
   if (!permitAuthen) {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("token");
     config.headers = { Authorization: `Bearer ${accessToken}` };
   }
 

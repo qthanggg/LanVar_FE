@@ -7,15 +7,14 @@ export const HomePage = () => {
   const [bestSellerProductList, setBestSellerProductList] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const { data: trendingProductList } = await axiosClient.get(
-        "/products/trending"
-      );
-      setTrendingProductList(trendingProductList);
-
-      const { data: bestSellerProductList } = await axiosClient.get(
-        "/products/best-seller"
-      );
-      setBestSellerProductList(bestSellerProductList);
+      // const { data: trendingProductList } = await axiosClient.get(
+      //   "/products/trending"
+      // );
+      // setTrendingProductList(trendingProductList);
+      // const { data: bestSellerProductList } = await axiosClient.get(
+      //   "/products/best-seller"
+      // );
+      // setBestSellerProductList(bestSellerProductList);
     };
     fetchData();
   }, []);

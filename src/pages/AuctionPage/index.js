@@ -1,0 +1,1 @@
+export { AuctionPage } from "./AuctionPage";
