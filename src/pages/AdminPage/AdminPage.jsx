@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for API calls
 import { axiosClient } from "src/axios/AxiosClient";
+import HeaderAdmin from "./HeaderAdmin";
 
 const AdminPage = () => {
   const [users, setUsers] = useState([]); // State to store user data
@@ -24,9 +25,27 @@ const AdminPage = () => {
     fetchUsers(); // Call the function on component mount
   }, []); // Empty dependency array ensures useEffect runs only once
 
+  const handleToggleUserStatus = async (id, currentStatus) => {
+    try {
+      // Gọi API để cập nhật trạng thái của người dùng
+      const newStatus = !currentStatus; // Chuyển đổi trạng thái
+      await axiosClient.put(`/Manage_Manager_Accounts/ActivateUser/${id}`, {
+        status: newStatus,
+      });
+      // Cập nhật danh sách người dùng sau khi cập nhật trạng thái thành công
+      const updatedUsers = users.map((user) =>
+        user.id === id ? { ...user, status: newStatus } : user
+      );
+      setUsers(updatedUsers);
+    } catch (error) {
+      console.error("Error toggling user status:", error); // Xử lý lỗi nếu cần
+    }
+  };
+
   return (
     <div>
-      {isLoading ? ( // Display loading indicator while fetching data
+      <HeaderAdmin />
+      {isLoading ? ( // Hiển thị biểu tượng tải khi đang tải dữ liệu
         <p>Loading users...</p>
       ) : (
         <table className="table">
@@ -39,15 +58,13 @@ const AdminPage = () => {
               <th scope="col">Address</th>
               <th scope="col">Phone</th>
               <th scope="col">Gender</th>
-              <th scope="col">status</th>
-              {/* Add more headers as needed based on your API data */}
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th> {/* Thêm tiêu đề cột mới */}
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
               <tr key={user.id || index}>
-                {" "}
-                {/* Use a unique key for each row */}
                 <th scope="row">{index + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
@@ -55,8 +72,15 @@ const AdminPage = () => {
                 <td>{user.address}</td>
                 <td>{user.phone}</td>
                 <td>{user.gender}</td>
-                <td>{user.status}</td>
-                {/* Add more table cells as needed based on your API data */}
+                <td>{user.status ? "Active" : "Deactive"}</td>
+                <td>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleToggleUserStatus(user.id, user.status)}
+                  >
+                    {user.status ? "Deactive" : "Active"}
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
