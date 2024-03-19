@@ -41,8 +41,32 @@ export const LoginPage = () => {
     dispatch(setLoggedInAccount(user));
 
     // Kiểm tra vai trò của người dùng và chuyển hướng nếu cần thiết
-    if (user.permission_id === 1) {
-      navigate("/admin");
+    // Đoạn mã kiểm tra vai trò của người dùng và điều hướng tới các trang tương ứng
+    const checkUserRole = (user) => {
+      switch (user.permission_id) {
+        case 1: // Admin
+          navigate("/admin");
+          break;
+        case 2: // Manager
+          navigate("/manager");
+          break;
+        case 3: // Staff
+          navigate("/staff");
+          break;
+        case 4: // Product Owner
+          navigate("/product-owner");
+          break;
+        case 5: // Customer
+          navigate("/home");
+          break;
+        default:
+          navigate("/home");
+      }
+    };
+
+    // Sử dụng hàm kiểm tra vai trò trong mã của bạn
+    if (user.permission_id) {
+      checkUserRole(user);
     } else {
       navigate("/home");
     }
