@@ -69,7 +69,6 @@ const ManagerPage = () => {
         "/ManageStaffAccounts/GetAllStaff"
       );
       setStaffAccounts(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("Error creating staff:", error);
     }
