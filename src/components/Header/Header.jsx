@@ -102,6 +102,24 @@ export const Header = () => {
                       />
                     </DropdownToggle>
                     <DropdownMenu right>
+                      {/* Thêm nút tương ứng với vai trò của người dùng */}
+                      {accountLoggedIn.permission_id === 2 && (
+                        <DropdownItem onClick={() => navigate("/manager")}>
+                          Manager Page
+                        </DropdownItem>
+                      )}
+                      {accountLoggedIn.permission_id === 3 && (
+                        <DropdownItem onClick={() => navigate("/staff")}>
+                          Staff Page
+                        </DropdownItem>
+                      )}
+                      {accountLoggedIn.permission_id === 4 && (
+                        <DropdownItem
+                          onClick={() => navigate("/product-owner")}
+                        >
+                          Product Owner Page
+                        </DropdownItem>
+                      )}
                       <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
                     </DropdownMenu>
                   </Dropdown>

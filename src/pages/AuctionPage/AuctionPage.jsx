@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { axiosClient } from "src/axios/AxiosClient";
-import { Card, CardHeader, CardBody, CardTitle, CardText } from "reactstrap";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardText,
+  Row,
+  Col,
+} from "reactstrap";
 
 export const AuctionPage = () => {
   const [auctions, setAuctions] = useState([]);
@@ -38,35 +46,46 @@ export const AuctionPage = () => {
               <CardHeader className="font-weight-bold">
                 {auction.auction_Name}
               </CardHeader>
+              <Row>
+                <Col sm="6">
+                  <img
+                    src={auction.product.image}
+                    alt={auction.product.product_Name}
+                    style={{ width: "100%" }}
+                  />
+                </Col>
+                <Col sm="6">
+                  <CardBody>
+                    <CardTitle tag="h5"></CardTitle>
+                    <CardText>
+                      <p>
+                        {/* Start Day: {new Date(auction.startDay).toLocaleDateString()} */}
+                      </p>
+                      <h4 className="font-weight-bold">
+                        {auction.product.product_Name}
+                      </h4>
+                      <p>
+                        Auction Day:{" "}
+                        {new Date(auction.auctionDay).toLocaleDateString()}
+                      </p>
+                      <p>Deposit Money: ${auction.deposit_Money}</p>
 
-              <CardBody>
-                <CardTitle tag="h5"></CardTitle>
-                <CardText>
-                  <p>
-                    {/* Start Day: {new Date(auction.startDay).toLocaleDateString()} */}
-                  </p>
-                  <h4 class="font-weight-bold">
-                    {auction.product.product_Name}
-                  </h4>
-                  <p>
-                    Auction Day:{" "}
-                    {new Date(auction.auctionDay).toLocaleDateString()}
-                  </p>
-                  <p>Deposit Money: ${auction.deposit_Money}</p>
-                  {/* <p>Status: {auction.status}</p> */}
-                  {/* <p>Password: {auction.password}</p> */}
-                </CardText>
-                <div>
-                  {/* <h4>Product Information</h4> */}
-                  {/* <p>ISBN: {auction.product.isbn}</p> */}
-                  <p>Description: {auction.product.product_Description}</p>
-                  <p>Reserve Price: ${auction.product.product_Price}</p>
-                  {/* <p>Type: {auction.product.type}</p> */}
-                  <p>
-                    {/* Status: {auction.product.status ? "Active" : "Inactive"} */}
-                  </p>
-                </div>
-              </CardBody>
+                      {/* <p>Status: {auction.status}</p> */}
+                      {/* <p>Password: {auction.password}</p> */}
+                    </CardText>
+                    <div>
+                      {/* <h4>Product Information</h4> */}
+                      {/* <p>ISBN: {auction.product.isbn}</p> */}
+                      <p>Description: {auction.product.product_Description}</p>
+                      <p>Reserve Price: ${auction.product.product_Price}</p>
+                      {/* <p>Type: {auction.product.type}</p> */}
+                      <p>
+                        {/* Status: {auction.product.status ? "Active" : "Inactive"} */}
+                      </p>
+                    </div>
+                  </CardBody>
+                </Col>
+              </Row>
             </Card>
           </div>
         ))}

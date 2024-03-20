@@ -41,6 +41,13 @@ const ShopCategoryPage = () => {
           {products.map((product) => (
             <Col key={product.id}>
               <Card className="mb-3">
+                <div className="card-img-container">
+                  <img
+                    src={product.image}
+                    className="card-img-top"
+                    alt={product.product_Name}
+                  />
+                </div>
                 <CardBody>
                   <CardTitle tag="h5">{product.product_Name}</CardTitle>
                   <CardSubtitle tag="h6" className="mb-2 text-muted">
