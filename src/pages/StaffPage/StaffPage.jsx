@@ -21,9 +21,14 @@ const StaffPage = () => {
 
   const handleAcceptAuction = async (auctionId) => {
     try {
-      console.log(auctionId);
       const response = await fetch(
-        `https://localhost:7022/api/Auction/AcceptAuction/${auctionId}`
+        `https://localhost:7022/api/Auction/AcceptAuction/${auctionId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
       if (response.ok) {

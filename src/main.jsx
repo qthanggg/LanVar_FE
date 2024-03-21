@@ -22,6 +22,7 @@ import ManagerPage from "./pages/ManagerPage/ManagerPage";
 import StaffPage from "./pages/StaffPage/StaffPage";
 import ProductOwnerPage from "./pages/ProductOwnerPage/ProductOwnerPage";
 import ShopCategoryPage from "./pages/ShopCategoryPage/ShopCategoryPage";
+import MyProductPage from "./pages/ProductOwnerPage/MyProductPage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -43,6 +44,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="manager" element={<ManagerPage />} />
             <Route path="staff" element={<StaffPage />} />
             <Route path="product-owner" element={<ProductOwnerPage />} />
+            <Route path="my-product" element={<MyProductPage />} />
 
             <Route path="*" element={<NotFound />} />
           </Route>

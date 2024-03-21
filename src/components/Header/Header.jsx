@@ -117,7 +117,12 @@ export const Header = () => {
                         <DropdownItem
                           onClick={() => navigate("/product-owner")}
                         >
-                          Product Owner Page
+                          Create Product
+                        </DropdownItem>
+                      )}
+                      {accountLoggedIn.permission_id === 4 && (
+                        <DropdownItem onClick={() => navigate("/my-product")}>
+                          My Product
                         </DropdownItem>
                       )}
                       <DropdownItem onClick={handleLogout}>Logout</DropdownItem>

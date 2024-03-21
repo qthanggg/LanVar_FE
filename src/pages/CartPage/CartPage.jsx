@@ -19,11 +19,11 @@ export const CartPage = () => {
         <tr>
           <th scope="row">{product.id}</th>
           <td className="cart-area__image">
-            <img width={150} height={100} src={product.imageUrl} />
+            <img width={150} height={100} src={product.image} />
           </td>
-          <td>{product.name}</td>
-          <td>${product.price}</td>
-          <td className="cart-area__quantity">
+          <td>{product.product_Name}</td>
+          <td>${product.product_Price}</td>
+          {/* <td className="cart-area__quantity">
             <Input
               type="number"
               value={quantity}
@@ -36,8 +36,8 @@ export const CartPage = () => {
                 );
               }}
             />
-          </td>
-          <td>${product.price * quantity}</td>
+          </td> */}
+          <td>${product.product_Price}</td>
         </tr>
       );
     }
@@ -53,7 +53,7 @@ export const CartPage = () => {
               <th>#</th>
               <th colSpan={2}>Product</th>
               <th>Price</th>
-              <th>Quantity</th>
+              {/* <th>Quantity</th> */}
               <th>Total</th>
             </tr>
           </thead>

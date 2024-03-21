@@ -20,6 +20,7 @@ import { axiosClient } from "src/axios/AxiosClient";
 const ManagerPage = () => {
   const [staffAccounts, setStaffAccounts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newStaff, setNewStaff] = useState({
     name: "",
     username: "",
@@ -73,7 +74,23 @@ const ManagerPage = () => {
       console.error("Error creating staff:", error);
     }
   };
-
+  const deleteStaff = async (id) => {
+    try {
+      // Gọi API xóa nhân viên theo ID
+      await axiosClient.delete(`/ManageStaffAccounts/DeleteStaff/${id}`);
+      // Refresh danh sách nhân viên sau khi xóa
+      const response = await axiosClient.get(
+        "/ManageStaffAccounts/GetAllStaff"
+      );
+      setStaffAccounts(response.data);
+    } catch (error) {
+      console.error("Error deleting staff:", error);
+    }
+    const confirmDelete = (id) => {
+      setDeleteStaffId(id);
+      setIsDeleteModalOpen(true);
+    };
+  };
   return (
     <Container>
       <Row>
@@ -110,6 +127,14 @@ const ManagerPage = () => {
                   <td>{staff.gender}</td>
                   <td>{new Date(staff.registerDay).toLocaleDateString()}</td>
                   <td>{staff.status ? "Active" : "Inactive"}</td>
+                  <td>
+                    <Button
+                      color="danger"
+                      onClick={() => deleteStaff(staff.id)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -229,6 +254,31 @@ const ManagerPage = () => {
           </Form>
         </ModalBody>
       </Modal>
+      {/* <Modal
+        isOpen={isDeleteModalOpen}
+        toggle={() => setIsDeleteModalOpen(false)}
+      >
+        <ModalHeader toggle={() => setIsDeleteModalOpen(false)}>
+          Confirm Delete
+        </ModalHeader>
+        <ModalBody>
+          Are you sure you want to delete this staff member?
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="danger"
+            onClick={() => {
+              deleteStaff(deleteStaffId);
+              setIsDeleteModalOpen(false);
+            }}
+          >
+            Delete
+          </Button>
+          <Button color="secondary" onClick={() => setIsDeleteModalOpen(false)}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal> */}
     </Container>
   );
 };
