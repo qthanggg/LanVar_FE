@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import { axiosClient } from "src/axios/AxiosClient";
-//mport HeaderAdmin from "./HeaderAdmin";
+import HeaderAdmin from "./HeaderAdmin";
+import SidebarAdmin from "./SlideBarAdmin";
 
 const AdminPage = () => {
   const [users, setUsers] = useState([]);
@@ -46,48 +47,59 @@ const AdminPage = () => {
 
   return (
     <div>
-      {/* <HeaderAdmin /> */}
-      {isLoading ? (
-        <p>Loading users...</p>
-      ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Username</th>
-              <th scope="col">Address</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Status</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={user.id || index}>
-                <th scope="row">{index + 1}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.username}</td>
-                <td>{user.address}</td>
-                <td>{user.phone}</td>
-                <td>{user.gender}</td>
-                <td>{user.status ? "Active" : "Deactive"}</td>
-                <td>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleToggleUserStatus(user.id, user.status)}
-                  >
-                    {user.status ? "Deactive" : "Active"}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <HeaderAdmin />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2">
+            <SidebarAdmin />
+          </div>
+          <div className="col-md-10">
+            {isLoading ? (
+              <p>Loading users...</p>
+            ) : (
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user, index) => (
+                    <tr key={user.id || index}>
+                      <th scope="row">{index + 1}</th>
+                      <td>{user.name}</td>
+                      <td>{user.email}</td>
+                      <td>{user.username}</td>
+                      <td>{user.address}</td>
+                      <td>{user.phone}</td>
+                      <td>{user.gender}</td>
+                      <td>{user.status ? "Active" : "Deactive"}</td>
+                      <td>
+                        <button
+                          className="btn btn-primary"
+                          onClick={() =>
+                            handleToggleUserStatus(user.id, user.status)
+                          }
+                        >
+                          {user.status ? "Deactive" : "Active"}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
