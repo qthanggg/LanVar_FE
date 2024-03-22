@@ -14,8 +14,6 @@ import { store } from "src/app/store";
 import { Provider } from "react-redux";
 import { AuctionPage } from "./pages/AuctionPage";
 
-//import { PrivateRoute } from "./pages/PrivateRoute";
-import { CartPage } from "./pages/CartPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import { PrivateRoute } from "./pages/PrivateRoute";
 import ManagerPage from "./pages/ManagerPage/ManagerPage";
@@ -23,6 +21,8 @@ import StaffPage from "./pages/StaffPage/StaffPage";
 import ProductOwnerPage from "./pages/ProductOwnerPage/ProductOwnerPage";
 import ShopCategoryPage from "./pages/ShopCategoryPage/ShopCategoryPage";
 import MyProductPage from "./pages/ProductOwnerPage/MyProductPage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import CartPage from "./pages/CartPage/CartPage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -45,6 +45,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="staff" element={<StaffPage />} />
             <Route path="product-owner" element={<ProductOwnerPage />} />
             <Route path="my-product" element={<MyProductPage />} />
+            <Route path="checkout" element={<CheckoutPage />} />
 
             <Route path="*" element={<NotFound />} />
           </Route>

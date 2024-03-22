@@ -21,9 +21,11 @@ const ProductOwnerPage = () => {
 
   const [form] = Form.useForm();
   const [existingProductNames, setExistingProductNames] = useState([]);
+  const [existingISBNs, setExistingISBNs] = useState([]);
 
   useEffect(() => {
     fetchExistingProductNames();
+    fetchExistingISBNs();
   }, []);
 
   const fetchExistingProductNames = async () => {
@@ -33,6 +35,16 @@ const ProductOwnerPage = () => {
       setExistingProductNames(productNames);
     } catch (error) {
       console.error("Error fetching existing product names:", error);
+    }
+  };
+
+  const fetchExistingISBNs = async () => {
+    try {
+      const response = await axiosClient.get("/SearchProduct/GetAllProducts");
+      const isbns = response.data.map((product) => product.isbn);
+      setExistingISBNs(isbns);
+    } catch (error) {
+      console.error("Error fetching existing ISBNs:", error);
     }
   };
 
@@ -50,14 +62,17 @@ const ProductOwnerPage = () => {
       toast("Create Success");
       form.resetFields();
     } catch (error) {
-      console.error("Error creating product:", error);
+      console.error("Error creating product:", error.message);
       // Handle error appropriately
+      toast.error(error.message); // Hiển thị thông báo lỗi
     }
   };
 
   const validatePrice = (rule, value, callback) => {
-    if (value <= 0) {
-      callback("Price must be greater than 0!");
+    if (value <= 0 || value > 10000000000000) {
+      callback(
+        "Price must be greater than 0 and less than or equal to 10k trillion!"
+      );
     } else {
       callback();
     }
@@ -71,6 +86,14 @@ const ProductOwnerPage = () => {
     }
   };
 
+  const validateISBN = (rule, value, callback) => {
+    if (existingISBNs.includes(value)) {
+      callback("ISBN already exists!");
+    } else {
+      callback();
+    }
+  };
+
   return (
     <div className="container col-md-6">
       <div className="">
@@ -79,7 +102,10 @@ const ProductOwnerPage = () => {
           <Form.Item
             label="ISBN"
             name="isbn"
-            rules={[{ required: true, message: "Please input ISBN!" }]}
+            rules={[
+              { required: true, message: "Please input ISBN!" },
+              { validator: validateISBN },
+            ]}
           >
             <Input />
           </Form.Item>
@@ -96,8 +122,8 @@ const ProductOwnerPage = () => {
           <Form.Item
             label="User ID"
             name="user_id"
-            hidden={true} // Đặt hidden thành true để ẩn trường này
-            initialValue={formData.user_id} // Đặt giá trị ban đầu của trường này thành userID
+            hidden={true}
+            initialValue={formData.user_id}
           >
             <Input />
           </Form.Item>
@@ -126,7 +152,12 @@ const ProductOwnerPage = () => {
           <Form.Item label="Type" name="type">
             <Input />
           </Form.Item>
-          <Form.Item label="Status" name="status" valuePropName="checked">
+          <Form.Item
+            label="Status"
+            name="status"
+            valuePropName="checked"
+            initialValue={true}
+          >
             <Checkbox />
           </Form.Item>
           <Form.Item>

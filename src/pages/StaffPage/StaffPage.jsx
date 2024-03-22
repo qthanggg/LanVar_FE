@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { ListGroup, ListGroupItem, Button } from "reactstrap";
+import { Card, Button } from "antd";
+
+const { Meta } = Card;
 
 const StaffPage = () => {
   const [auctions, setAuctions] = useState([]);
@@ -49,24 +51,37 @@ const StaffPage = () => {
   };
 
   return (
-    <div>
-      <h1>Waiting Auctions</h1>
-      <ListGroup>
-        {auctions.map((auction) => (
-          <ListGroupItem key={auction.id}>
-            <p>Product Name: {auction.product.product_Name}</p>
-            <p>Description: {auction.product.product_Description}</p>
-            <p>Start Day: {auction.startDay}</p>
-            <p>Auction Day: {auction.auctionDay}</p>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
+      {auctions.map((auction) => (
+        <Card
+          key={auction.id}
+          style={{ width: 300, margin: "16px" }}
+          actions={[
             <Button
-              color="primary"
+              type="primary"
               onClick={() => handleAcceptAuction(auction.id)}
             >
               Accept Auction
-            </Button>
-          </ListGroupItem>
-        ))}
-      </ListGroup>
+            </Button>,
+          ]}
+        >
+          <img
+            src={auction.product.image}
+            alt="Product"
+            style={{ width: "250px", height: "250px" }}
+          />
+          <Meta
+            title={`Product Name: ${auction.product.product_Name}`}
+            description={
+              <>
+                <p>Description: {auction.product.product_Description}</p>
+                <p>Start Day: {auction.startDay}</p>
+                <p>Auction Day: {auction.auctionDay}</p>
+              </>
+            }
+          />
+        </Card>
+      ))}
     </div>
   );
 };

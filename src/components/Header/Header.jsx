@@ -84,11 +84,7 @@ export const Header = () => {
                 <FontAwesomeIcon icon={faShoppingCart} />{" "}
                 {Object.keys(carts).length}
               </NavItem>
-              <NavItem className="header__actions__buy">
-                <Button color="primary" outline>
-                  Buy Now
-                </Button>
-              </NavItem>
+
               {accountLoggedIn.username ? (
                 <NavItem className="header__actions__user">
                   <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
