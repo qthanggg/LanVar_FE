@@ -48,13 +48,13 @@ export const LoginPage = () => {
           navigate("/admin");
           break;
         case 2: // Manager
-          navigate("/manager");
+          navigate("/home");
           break;
         case 3: // Staff
-          navigate("/staff");
+          navigate("/home");
           break;
         case 4: // Product Owner
-          navigate("/product-owner");
+          navigate("/home");
           break;
         case 5: // Customer
           navigate("/home");

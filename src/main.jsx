@@ -12,7 +12,6 @@ import { ProductDetailPage } from "src/pages/ProductDetailPage";
 import { RegisterPage } from "src/pages/RegisterPage";
 import { store } from "src/app/store";
 import { Provider } from "react-redux";
-import { AuctionPage } from "./pages/AuctionPage";
 
 import AdminPage from "./pages/AdminPage/AdminPage";
 import { PrivateRoute } from "./pages/PrivateRoute";
@@ -23,6 +22,8 @@ import ShopCategoryPage from "./pages/ShopCategoryPage/ShopCategoryPage";
 import MyProductPage from "./pages/ProductOwnerPage/MyProductPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import CartPage from "./pages/CartPage/CartPage";
+import AuctionRoom from "./pages/AuctionRom/AuctionRoom";
+import AuctionPage from "./pages/AuctionPage/AuctionPage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -40,6 +41,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="cart" element={<CartPage />} />
           <Route path="/" element={<PrivateRoute />}>
             <Route path="auction" element={<AuctionPage />} />
+            <Route path="auction-room" element={<AuctionRoom />} />
 
             <Route path="manager" element={<ManagerPage />} />
             <Route path="staff" element={<StaffPage />} />
